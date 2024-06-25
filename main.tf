@@ -26,9 +26,10 @@ resource "azuread_user" "users" {
   user_principal_name = each.value.email
   display_name        = each.value.display_name
   mail_nickname       = split("@", each.value.email)[0]
-  given_name          = each.value.first_name
-  surname             = each.value.last_name
-  password            = random_password.users[each.key].result
+  # "jsmith@M365x25212640.OnMicrosoft.com" => [jsmith, M365x25212640.OnMicrosoft.com] => [0] = jsmith
+  given_name = each.value.first_name
+  surname    = each.value.last_name
+  password   = random_password.users[each.key].result
 }
 
 # each.key => 0,1,2,...
