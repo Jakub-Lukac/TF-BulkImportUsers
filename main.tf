@@ -3,14 +3,6 @@ locals {
   users_list = { for idx, user in local.users : idx => user }
 }
 
-output "users" {
-  value = local.users
-}
-
-output "users_list" {
-  value = local.users_list
-}
-
 # Generate random passwords for each user
 resource "random_password" "users" {
   for_each = local.users_list
